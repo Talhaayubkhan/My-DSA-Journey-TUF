@@ -88,17 +88,60 @@ public class CountDigits {
 
       public static void printAllDivisonOfNum(int n) {
             // Loop to print all divisors of the number
-            for (int i = 1; i <= n; i++) {
+            // this 0(n) time complexity! we want 0(1)!
+            // for (int i = 1; i <= n; i++) {
+            // // Check if i is a divisor of n
+            // if (n % i == 0)
+            // System.out.print(" " + i + " ");
+            // }
+
+            // Time Complexity is O(nlogn)
+            // Create a list to store the divisors
+            List<Integer> list = new ArrayList<>();
+            // Loop through all numbers from 1 to the square root of n
+            for (int i = 1; i <= Math.sqrt(n); i++) {
                   // Check if i is a divisor of n
-                  if (n % i == 0)
-                        System.out.print(" " + i + " ");
+                  if (n % i == 0) {
+                        list.add(i); // Add the divisor i to the list
+                        // Add the corresponding divisor n/i, but only if it's different from i
+                        if ((n / i) != i) {
+                              list.add(n / i);
+                        }
+                  }
+            }
+            // Sort the list of divisors
+            Collections.sort(list);
+
+            // Print the sorted list of divisors
+            for (int num : list) {
+                  System.out.print(num + " ");
             }
 
       }
 
+      public static void printPrimeNumbers(int n) {
+            int count = 0;
+
+            for (int i = 1; i <= Math.sqrt(n); i++) {
+                  if (n % i == 0) {
+                        count++;
+
+                        if ((n / i) != i) {
+                              count++;
+                        }
+                  }
+            }
+
+            if (count == 2) {
+                  System.out.print("Prime Number");
+            } else {
+                  System.out.print("Not a Prime Number");
+            }
+      }
+
       // Main method to execute the program
       public static void main(String[] args) {
-            int n = 36; // Example number to test the methods
+            int n = 29; // Example number to test the methods
 
             // Uncomment the line below to count and print the digits
             // countDigits(n);
@@ -113,7 +156,10 @@ public class CountDigits {
             // isArmstrong(n);
 
             // Call the method to print all divisors of the number
-            printAllDivisonOfNum(n);
+            // printAllDivisonOfNum(n);
+
+            // Call the method to print all prime numbers
+            printPrimeNumbers(n);
 
             // Optionally, count the number of digits using logarithm (not used in this
             // implementation)
